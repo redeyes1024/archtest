@@ -1,0 +1,73 @@
+# i3 configuration (Xorg)
+
+set $mod Mod4
+
+font pango:JetBrainsMono Nerd Font 10
+
+floating_modifier $mod
+
+exec_always --no-startup-id ~/.config/i3/scripts/autostart.sh
+
+# Terminal / launcher
+bindsym $mod+Return exec --no-startup-id kitty
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Ctrl+r exec --no-startup-id ~/.config/i3/scripts/rofi-theme-selector.sh
+
+# Basics
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu.sh
+
+# Focus / move
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+
+# Layout
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space floating toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Screenshots (Xorg)
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+
+# Lock
+bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/scripts/lock.sh
+
+# Aesthetics
+gaps inner 10
+gaps outer 0
+
+# Disable i3bar (polybar is used instead)
+bar {
+    mode invisible
+}

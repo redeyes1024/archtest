@@ -1,0 +1,15 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/* KooL i3wm - Default
+ *
+ * - Main themes/configs are in ~/.config/rofi/themes/
+ * - To load a new theme: edit the @theme path below (or use the theme selector script).
+ */
+
+/* ---- Global Configuration Fonts ---- */
+@import "~/.config/rofi/0-shared-fonts.rasi"
+
+/* Force kitty as terminal for Terminal=true apps and run-shell */
+@import "~/.config/rofi/00-terminal.rasi"
+
+/* Main themes in ~/.config/rofi/themes */
+@theme "~/.config/rofi/themes/KooL_style-4.rasi"

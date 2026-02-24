@@ -1,0 +1,11 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/* Global rofi fonts (i3/Xorg) */
+
+configuration {
+  font: "JetBrainsMono Nerd Font SemiBold 15";
+}
+
+element-text {
+  font: "JetBrainsMono Nerd Font SemiBold 13";
+}
+

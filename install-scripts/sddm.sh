@@ -67,11 +67,27 @@ printf "\n%.0s" {1..1}
 printf "${INFO} Activating sddm service........\n"
 sudo systemctl enable sddm
 
+dpi_conf_dir="/etc/sddm.conf.d"
+dpi_conf_file="$dpi_conf_dir/dpi.conf"
+dpi_value="144"
+
+printf "${INFO} Setting SDDM DPI to ${dpi_value}........\n"
+if [ ! -d "$dpi_conf_dir" ]; then
+  sudo mkdir -p "$dpi_conf_dir" 2>&1 | tee -a "$LOG"
+fi
+
+sudo tee "$dpi_conf_file" > /dev/null <<EOF
+[X11]
+ServerArguments=-nolisten tcp -dpi $dpi_value
+EOF
+echo "Configured $dpi_conf_file with DPI $dpi_value." | tee -a "$LOG"
+
 x_sessions_dir=/usr/share/xsessions
 [ ! -d "$x_sessions_dir" ] && {
   printf "$CAT - $x_sessions_dir not found, creating...\n"
   sudo mkdir "$x_sessions_dir" 2>&1 | tee -a "$LOG"
 }
+
 
 printf "\n%.0s" {1..2}
 

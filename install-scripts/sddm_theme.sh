@@ -2,8 +2,9 @@
 # 💫 https://github.com/LinuxBeginnings 💫 #
 # SDDM themes #
 
-source_theme="https://github.com/LinuxBeginnings/simple-sddm-2.git"
-theme_name="simple_sddm_2"
+source_theme="DotFIles/i3-Dots/sddm/"
+theme_name="simple-sddm-2"
+
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -38,7 +39,7 @@ if [ -d "$theme_name" ]; then
 fi
 
 # Clone the repository
-if git clone --depth=1 "$source_theme" "$theme_name"; then
+  cp -r "$source_theme/$theme_name" "./$theme_name"
   if [ ! -d "$theme_name" ]; then
     echo "${ERROR} Failed to clone the repository." | tee -a "$LOG"
   fi
@@ -106,9 +107,6 @@ if git clone --depth=1 "$source_theme" "$theme_name"; then
 
   echo "${OK} - ${MAGENTA}Additional ${YELLOW}$theme_name SDDM Theme${RESET} successfully installed." | tee -a "$LOG"
 
-else
-
-  echo "${ERROR} - Failed to clone the sddm theme repository. Please check your internet connection." | tee -a "$LOG" >&2
-fi
+ 
 
 printf "\n%.0s" {1..2}

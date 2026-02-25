@@ -1,0 +1,21 @@
+# i3 Monitor Profiles (xrandr)
+
+Add one shell script per profile in this directory (for example: `office.sh`, `mirror.sh`).
+
+Rules:
+- The script should contain `xrandr` commands only.
+- Keep each profile idempotent so it can be applied repeatedly.
+- Name files with `.sh`; the menu strips the extension automatically.
+
+Quick start:
+1. Copy `default.sh` to a new file name.
+2. Edit the `xrandr --output ...` commands for your setup.
+3. Open the menu with the i3 keybind and choose the profile.
+
+Example profile:
+```
+#!/usr/bin/env bash
+set -euo pipefail
+xrandr --output eDP-1 --auto --primary \
+       --output HDMI-1 --auto --right-of eDP-1
+```

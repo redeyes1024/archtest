@@ -6,18 +6,37 @@ font pango:JetBrainsMono Nerd Font 10
 
 floating_modifier $mod
 
+# Theme palette (mapped from wallust color12/color10)
+set $focused_accent #784CA0
+set $unfocused_accent #613D81
+set $surface_bg #181519
+set $text_fg #F0D6CC
+set $urgent_accent #CC659A
+
+default_border pixel 2
+default_floating_border pixel 2
+
 exec_always --no-startup-id ~/.config/i3/scripts/autostart.sh
 
 # Terminal / launcher
 bindsym $mod+Return exec --no-startup-id kitty
 bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+Ctrl+r exec --no-startup-id ~/.config/i3/scripts/rofi-theme-selector.sh
+bindsym $mod+t exec --no-startup-id bash ~/.config/i3/scripts/ThemeChanger.sh
+bindsym $mod+Shift+t exec --no-startup-id bash ~/.config/i3/scripts/DarkLight.sh
+bindsym $mod+Ctrl+r exec --no-startup-id bash ~/.config/i3/scripts/RofiThemeSelector.sh
+bindsym $mod+Ctrl+k exec --no-startup-id bash ~/.config/i3/scripts/Kitty_themes.sh
+bindsym $mod+Mod1+v exec --no-startup-id bash ~/.config/i3/scripts/ClipManager.sh
+bindsym $mod+Shift+m exec --no-startup-id bash ~/.config/i3/scripts/MonitorProfiles.sh
+bindsym $mod+Ctrl+e exec --no-startup-id bash ~/.config/i3/scripts/Kool_Quick_Settings.sh
+bindsym $mod+F1 exec --no-startup-id bash ~/.config/i3/scripts/KeyHints.sh
+bindsym $mod+Shift+F1 exec --no-startup-id bash ~/.config/i3/scripts/KeyBinds.sh
 
 # Basics
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu.sh
+bindsym Ctrl+Mod1+p exec --no-startup-id ~/.config/i3/scripts/powermenu.sh
 
 # Focus / move
 bindsym $mod+h focus left
@@ -56,16 +75,52 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+# Core utility hotkeys
+bindsym XF86AudioRaiseVolume exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --inc
+bindsym XF86AudioLowerVolume exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --dec
+bindsym Mod1+XF86AudioRaiseVolume exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --inc-precise
+bindsym Mod1+XF86AudioLowerVolume exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --dec-precise
+bindsym XF86AudioMute exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --toggle
+bindsym XF86AudioMicMute exec --no-startup-id bash ~/.config/i3/scripts/Volume.sh --toggle-mic
+
+bindsym XF86MonBrightnessUp exec --no-startup-id bash ~/.config/i3/scripts/Brightness.sh --inc
+bindsym XF86MonBrightnessDown exec --no-startup-id bash ~/.config/i3/scripts/Brightness.sh --dec
+bindsym XF86KbdBrightnessUp exec --no-startup-id bash ~/.config/i3/scripts/BrightnessKbd.sh --inc
+bindsym XF86KbdBrightnessDown exec --no-startup-id bash ~/.config/i3/scripts/BrightnessKbd.sh --dec
+bindsym XF86TouchpadToggle exec --no-startup-id bash ~/.config/i3/scripts/TouchPad.sh toggle
+bindsym Mod1+Shift_L exec --no-startup-id bash ~/.config/i3/scripts/KeyboardLayout.sh switch
+bindsym Mod1+Shift_R exec --no-startup-id bash ~/.config/i3/scripts/KeyboardLayout.sh switch
+
+bindsym XF86AudioPlayPause exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --pause
+bindsym XF86AudioPlay exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --pause
+bindsym XF86AudioPause exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --pause
+bindsym XF86AudioNext exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --nxt
+bindsym XF86AudioPrev exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --prv
+bindsym XF86AudioStop exec --no-startup-id bash ~/.config/i3/scripts/MediaCtrl.sh --stop
+
 # Screenshots (Xorg)
-bindsym Print exec --no-startup-id flameshot gui
-bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+bindsym Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --now
+bindsym $mod+Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --now
+bindsym $mod+Shift+Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --area
+bindsym $mod+Ctrl+Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --in5
+bindsym $mod+Ctrl+Shift+Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --in10
+bindsym Mod1+Print exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --active
+bindsym $mod+Shift+s exec --no-startup-id bash ~/.config/i3/scripts/ScreenShot.sh --area
 
 # Lock
-bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/scripts/lock.sh
+bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/scripts/lock.sh
+bindsym Ctrl+Mod1+l exec --no-startup-id ~/.config/i3/scripts/lock.sh
 
-# Aesthetics
-gaps inner 10
-gaps outer 0
+# Aesthetics (gaps + focused/unfocused colors)
+gaps inner 2
+gaps outer 4
+
+client.focused          $focused_accent   $focused_accent   $text_fg $focused_accent   $focused_accent
+client.focused_inactive $unfocused_accent $unfocused_accent $text_fg $unfocused_accent $unfocused_accent
+client.unfocused        $unfocused_accent $surface_bg       $text_fg $unfocused_accent $unfocused_accent
+client.urgent           $urgent_accent    $urgent_accent    $text_fg $urgent_accent    $urgent_accent
+client.placeholder      $surface_bg       $surface_bg       $text_fg $surface_bg        $surface_bg
+client.background       $surface_bg
 
 # Disable i3bar (polybar is used instead)
 bar {

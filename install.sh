@@ -442,9 +442,10 @@ for option in "${options[@]}"; do
 done
 
 sleep 1
-# copy fastfetch config if arch.png is not present
-if [ ! -f "$HOME/.config/fastfetch/arch.png" ]; then
-    cp -r assets/fastfetch "$HOME/.config/"
+# Seed fastfetch defaults only when user has no fastfetch config yet.
+if [ ! -f "$HOME/.config/fastfetch/config.jsonc" ] && [ -d "assets/fastfetch" ]; then
+    mkdir -p "$HOME/.config/fastfetch"
+    cp -r assets/fastfetch/. "$HOME/.config/fastfetch/"
 fi
 
 clear

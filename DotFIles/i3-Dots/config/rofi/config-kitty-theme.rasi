@@ -1,0 +1,60 @@
+/* Kitty Theme Picker */
+
+@import "~/.config/rofi/config.rasi"
+
+configuration {
+  modi: "drun";
+}
+
+window {
+  width: inherit;
+  height: inherit;
+  border-radius: 15px;
+}
+
+mainbox {
+  children: [ "inputbar", "listview" ];
+}
+
+listbox {
+  border-radius: 12px;
+}
+
+inputbar {
+  padding: 14px;
+  border-radius: 10px;
+}
+
+entry {
+  expand: true;
+  placeholder: "Choose Kitty theme";
+}
+
+listview {
+  columns: 3;
+  lines: 4;
+  spacing: 4px;
+  border-radius: 10px;
+  cycle: true;
+}
+
+element {
+  orientation: horizontal;
+}
+
+message {
+  border-radius: 10px;
+}
+
+textbox {
+  padding: 15px;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  margin: 5px 30px 5px 30px;
+}

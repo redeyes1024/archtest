@@ -1,0 +1,37 @@
+/* Monitor Profiles Menu */
+
+@import "~/.config/rofi/config.rasi"
+
+window {
+  width: inherit;
+  height: inherit;
+}
+
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+entry {
+  width: 48%;
+  placeholder: "Search / choose monitor profile";
+  horizontal-align: 0.5;
+}
+
+listview {
+  columns: 2;
+  lines: 4;
+  fixed-height: false;
+  margin: 10px;
+  scrollbar: true;
+  cycle: true;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.5;
+  vertical-align: 0.0;
+  margin: 5px 30px 5px 30px;
+}

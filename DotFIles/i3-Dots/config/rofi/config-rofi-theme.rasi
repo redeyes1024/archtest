@@ -1,0 +1,57 @@
+/* Rofi Theme Picker */
+
+@import "~/.config/rofi/config.rasi"
+
+window {
+  width: inherit;
+  height: inherit;
+}
+
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+custombox {
+  spacing: 0px;
+  background-color: inherit;
+  text-color: inherit;
+  orientation: vertical;
+  children: [ "listview" ];
+}
+
+entry {
+  expand: true;
+  placeholder: "Select a Rofi theme";
+}
+
+listview {
+  columns: 2;
+  lines: 7;
+  fixed-height: false;
+  margin: 10px;
+  scrollbar: true;
+  spacing: 6px;
+  cycle: true;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  vertical-align: 0.5;
+  margin: 0px;
+  padding: 0px;
+}
+
+message {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: inherit;
+}
+
+textbox {
+  text-color: inherit;
+  background-color: inherit;
+}

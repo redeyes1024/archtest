@@ -1,0 +1,41 @@
+/* i3 keybind search menu */
+
+@import "~/.config/rofi/config.rasi"
+
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+entry {
+  expand: true;
+  placeholder: "Search i3 keybinds";
+}
+
+listview {
+  columns: 2;
+  lines: 8;
+  fixed-height: false;
+  scrollbar: true;
+  spacing: 6px;
+  cycle: true;
+}
+
+window {
+  width: 90%;
+  height: inherit;
+}
+
+element {
+  orientation: horizontal;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  vertical-align: 0.5;
+  margin: 0px;
+  padding: 0px;
+}

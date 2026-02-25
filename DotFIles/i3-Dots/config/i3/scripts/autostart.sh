@@ -10,6 +10,11 @@ run_once() {
 run_once dunst
 run_once nm-applet
 
+# Clipboard manager
+if command -v copyq >/dev/null 2>&1; then
+  run_once copyq --start-server
+fi
+
 # Polkit agent
 if [ -x /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 ]; then
   pgrep -u "$USER" -f polkit-gnome-authentication-agent-1 >/dev/null 2>&1 || \
@@ -23,7 +28,9 @@ fi
 
 # Wallpaper (optional)
 WALL="$HOME/Pictures/wallpapers/wallpaper.jpg"
-if command -v feh >/dev/null 2>&1 && [ -f "$WALL" ]; then
+if [ -x "$HOME/.config/i3/scripts/WallustFeh.sh" ] && [ -f "$WALL" ]; then
+  "$HOME/.config/i3/scripts/WallustFeh.sh" --skip-refresh "$WALL" &
+elif command -v feh >/dev/null 2>&1 && [ -f "$WALL" ]; then
   feh --no-fehbg --bg-fill "$WALL" &
 fi
 

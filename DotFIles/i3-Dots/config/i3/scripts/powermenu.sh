@@ -2,20 +2,29 @@
 set -euo pipefail
 
 if ! command -v rofi >/dev/null 2>&1; then
+  echo "powermenu requires rofi." >&2
   exit 1
 fi
 
-choice="$(printf "lock\nlogout\nsuspend\nreboot\nshutdown\n" | rofi -dmenu -i -p power)"
+lock_screen() {
+  if [ -x "$HOME/.config/i3/scripts/lock.sh" ]; then
+    "$HOME/.config/i3/scripts/lock.sh"
+  else
+    loginctl lock-session
+  fi
+}
+
+choice="$(printf "lock\nlogout\nsuspend\nreboot\nshutdown\n" | rofi -dmenu -i -p "power")"
 
 case "$choice" in
   lock)
-    "$HOME/.config/i3/scripts/lock.sh"
+    lock_screen
     ;;
   logout)
     i3-msg exit
     ;;
   suspend)
-    "$HOME/.config/i3/scripts/lock.sh" || true
+    lock_screen || true
     systemctl suspend
     ;;
   reboot)

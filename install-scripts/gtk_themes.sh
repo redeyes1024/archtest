@@ -36,15 +36,10 @@ if [ -d "GTK-themes-icons" ]; then
     rm -rf "GTK-themes-icons" 2>&1 | tee -a "$LOG"
 fi
 
-echo "$NOTE Cloning ${SKY_BLUE}GTK themes and Icons${RESET} repository..." 2>&1 | tee -a "$LOG"
-if git clone --depth=1 https://github.com/LinuxBeginnings/GTK-themes-icons.git ; then
-    cd GTK-themes-icons
-    chmod +x auto-extract.sh
-    ./auto-extract.sh
-    cd ..
-    echo "$OK Extracted GTK Themes & Icons to ~/.icons & ~/.themes directories" 2>&1 | tee -a "$LOG"
-else
-    echo "$ERROR Download failed for GTK themes and Icons.." 2>&1 | tee -a "$LOG"
-fi
+cd "$PARENT_DIR\assets\gtk-theme\GTK-themes-icons" || { echo "${ERROR} Failed to change directory to $PARENT_DIR\assets\gtk-theme\GTK-themes-icons"; exit 1; }
+./auto-extract.sh
+cd "$PARENT_DIR" || { echo "${ERROR} Failed to change directory to $PARENT_DIR"; exit 1; }
+echo "$OK Extracted GTK Themes & Icons to ~/.icons & ~/.themes directories" 2>&1 | tee -a "$LOG"
+
 
 printf "\n%.0s" {1..2}

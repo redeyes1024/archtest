@@ -2,7 +2,7 @@
 # 💫 https://github.com/LinuxBeginnings 💫 #
 # SDDM themes #
 
-source_theme="DotFIles/i3-Dots/sddm/theme"
+source_theme="assets/sddm/theme"
 theme_name="simple-sddm-2"
 
 

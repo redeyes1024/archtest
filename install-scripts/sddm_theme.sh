@@ -2,7 +2,7 @@
 # 💫 https://github.com/LinuxBeginnings 💫 #
 # SDDM themes #
 
-source_theme="DotFIles/i3-Dots/sddm/"
+source_theme="DotFIles/i3-Dots/sddm/theme"
 theme_name="simple-sddm-2"
 
 
@@ -39,7 +39,7 @@ if [ -d "$theme_name" ]; then
 fi
 
 # Clone the repository
-  cp -r "$source_theme/$theme_name" "./$theme_name"
+  cp -R "$source_theme/$theme_name" "./$theme_name"
   if [ ! -d "$theme_name" ]; then
     echo "${ERROR} Failed to clone the repository." | tee -a "$LOG"
   fi

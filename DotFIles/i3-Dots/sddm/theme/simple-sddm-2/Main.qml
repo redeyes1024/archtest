@@ -28,16 +28,28 @@ Pane {
 
     font.family: config.Font
     font.pointSize: config.FontSize !== "" ? config.FontSize : parseInt(height / 80) || 13
-
+    
     focus: true
 
-    property bool leftleft: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "left" && config.BackgroundHorizontalAlignment == "left"
+    property bool leftleft: config.HaveFormBackground == "true" &&
+                            config.PartialBlur == "false" &&
+                            config.FormPosition == "left" &&
+                            config.BackgroundHorizontalAlignment == "left"
 
-    property bool leftcenter: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "left" && config.BackgroundHorizontalAlignment == "center"
+    property bool leftcenter: config.HaveFormBackground == "true" &&
+                              config.PartialBlur == "false" &&
+                              config.FormPosition == "left" &&
+                              config.BackgroundHorizontalAlignment == "center"
 
-    property bool rightright: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "right" && config.BackgroundHorizontalAlignment == "right"
+    property bool rightright: config.HaveFormBackground == "true" &&
+                              config.PartialBlur == "false" &&
+                              config.FormPosition == "right" &&
+                              config.BackgroundHorizontalAlignment == "right"
 
-    property bool rightcenter: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "right" && config.BackgroundHorizontalAlignment == "center"
+    property bool rightcenter: config.HaveFormBackground == "true" &&
+                               config.PartialBlur == "false" &&
+                               config.FormPosition == "right" &&
+                               config.BackgroundHorizontalAlignment == "center"
 
     Item {
         id: sizeHelper
@@ -45,7 +57,7 @@ Pane {
         height: parent.height
         width: parent.width
         anchors.fill: parent
-
+        
         Rectangle {
             id: tintLayer
 
@@ -72,7 +84,6 @@ Pane {
         LoginForm {
             id: form
 
-            opacity: config.DimBackground
             height: parent.height
             width: parent.width / 2.5
             anchors.left: config.FormPosition == "left" ? parent.left : undefined
@@ -88,17 +99,15 @@ Pane {
             // x * 0.4 = x / 2.5
             width: config.KeyboardSize == "" ? parent.width * 0.4 : parent.width * config.KeyboardSize
             anchors.bottom: parent.bottom
-            anchors.left: config.VirtualKeyboardPosition == "left" ? parent.left : undefined
-            anchors.horizontalCenter: config.VirtualKeyboardPosition == "center" ? parent.horizontalCenter : undefined
-            anchors.right: config.VirtualKeyboardPosition == "right" ? parent.right : undefined
+            anchors.left: config.VirtualKeyboardPosition == "left" ? parent.left : undefined;
+            anchors.horizontalCenter: config.VirtualKeyboardPosition == "center" ? parent.horizontalCenter : undefined;
+            anchors.right: config.VirtualKeyboardPosition == "right" ? parent.right : undefined;
             z: 1
-
+            
             state: "hidden"
             property bool keyboardActive: item ? item.active : false
 
-            function switchState() {
-                state = state == "hidden" ? "visible" : "hidden";
-            }
+            function switchState() { state = state == "hidden" ? "visible" : "hidden"}
             states: [
                 State {
                     name: "visible"
@@ -112,7 +121,7 @@ Pane {
                     name: "hidden"
                     PropertyChanges {
                         target: virtualKeyboard
-                        y: root.height - root.height / 4
+                        y: root.height - root.height/4
                         opacity: 0
                     }
                 }
@@ -170,7 +179,7 @@ Pane {
                 }
             ]
         }
-
+        
         Image {
             id: backgroundPlaceholderImage
 
@@ -181,23 +190,23 @@ Pane {
 
         AnimatedImage {
             id: backgroundImage
-
+            
             MediaPlayer {
                 id: player
-
+                
                 videoOutput: videoOutput
                 autoPlay: true
                 playbackRate: config.BackgroundSpeed == "" ? 1.0 : config.BackgroundSpeed
                 loops: -1
                 onPlayingChanged: {
-                    console.log("Video started.");
+                    console.log("Video started.")
                     backgroundPlaceholderImage.visible = false;
                 }
             }
 
             VideoOutput {
                 id: videoOutput
-
+                
                 fillMode: config.CropBackground == "true" ? VideoOutput.PreserveAspectCrop : VideoOutput.PreserveAspectFit
                 anchors.fill: parent
             }
@@ -207,9 +216,15 @@ Pane {
             anchors.left: leftleft || leftcenter ? formBackground.right : undefined
             anchors.right: rightright || rightcenter ? formBackground.left : undefined
 
-            horizontalAlignment: config.BackgroundHorizontalAlignment == "left" ? Image.AlignLeft : config.BackgroundHorizontalAlignment == "right" ? Image.AlignRight : Image.AlignHCenter
+            horizontalAlignment: config.BackgroundHorizontalAlignment == "left" ?
+                                 Image.AlignLeft :
+                                 config.BackgroundHorizontalAlignment == "right" ?
+                                 Image.AlignRight : Image.AlignHCenter
 
-            verticalAlignment: config.BackgroundVerticalAlignment == "top" ? Image.AlignTop : config.BackgroundVerticalAlignment == "bottom" ? Image.AlignBottom : Image.AlignVCenter
+            verticalAlignment: config.BackgroundVerticalAlignment == "top" ?
+                               Image.AlignTop :
+                               config.BackgroundVerticalAlignment == "bottom" ?
+                               Image.AlignBottom : Image.AlignVCenter
 
             speed: config.BackgroundSpeed == "" ? 1.0 : config.BackgroundSpeed
             paused: config.PauseBackground == "true" ? 1 : 0
@@ -219,15 +234,16 @@ Pane {
             clip: true
             mipmap: true
 
-            Component.onCompleted: {
-                var fileType = config.Background.substring(config.Background.lastIndexOf(".") + 1);
+            Component.onCompleted:{
+                var fileType = config.Background.substring(config.Background.lastIndexOf(".") + 1)
                 const videoFileTypes = ["avi", "mp4", "mov", "mkv", "m4v", "webm"];
                 if (videoFileTypes.includes(fileType)) {
                     backgroundPlaceholderImage.visible = true;
-                    player.source = Qt.resolvedUrl(config.Background);
+                    player.source = Qt.resolvedUrl(config.Background)
                     player.play();
-                } else {
-                    backgroundImage.source = config.background || config.Background;
+                }
+                else{
+                    backgroundImage.source = config.background || config.Background
                 }
             }
         }
@@ -245,20 +261,20 @@ Pane {
             anchors.centerIn: form
 
             sourceItem: backgroundImage
-            sourceRect: Qt.rect(x, y, width, height)
+            sourceRect: Qt.rect(x,y,width,height)
             visible: config.FullBlur == "true" || config.PartialBlur == "true" ? true : false
         }
 
         MultiEffect {
             id: blur
-
+            
             height: parent.height
 
             // width: config.FullBlur == "true" ? parent.width : form.width
             // anchors.centerIn: config.FullBlur == "true" ? parent : form
 
             // This solves problem when FullBlur and HaveFormBackground is set to true but PartialBlur is false and FormPosition isn't center.
-            width: (config.FullBlur == "true" && config.PartialBlur == "false" && config.FormPosition != "center") ? parent.width - formBackground.width : config.FullBlur == "true" ? parent.width : form.width
+            width: (config.FullBlur == "true" && config.PartialBlur == "false" && config.FormPosition != "center" ) ? parent.width - formBackground.width : config.FullBlur == "true" ? parent.width : form.width 
             anchors.centerIn: config.FullBlur == "true" ? backgroundImage : form
 
             source: config.FullBlur == "true" ? backgroundImage : blurMask

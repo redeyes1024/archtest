@@ -77,8 +77,13 @@ if [ ! -d "$dpi_conf_dir" ]; then
 fi
 
 sudo tee "$dpi_conf_file" > /dev/null <<EOF
+[General]
+DisplayServer=x11
+# This forces Qt6 to scale the UI elements (buttons/boxes)
+GreeterEnvironment=QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=192
+
 [X11]
-ServerArguments=-nolisten tcp -dpi $dpi_value
+ServerArguments=-nolisten tcp -dpi 192
 EOF
 echo "Configured $dpi_conf_file with DPI $dpi_value." | tee -a "$LOG"
 

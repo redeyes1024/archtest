@@ -130,11 +130,9 @@ sddm_theme="OFF"
 xdph="OFF"
 zsh="OFF"
 pokemon="OFF"
-rog="OFF"
 dots="OFF"
 input_group="OFF"
-nvidia="OFF"
-nouveau="OFF"
+
 
 # Function to load preset file
 load_preset() {

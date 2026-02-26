@@ -83,7 +83,7 @@ DisplayServer=x11
 GreeterEnvironment=QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=192
 
 [X11]
-ServerArguments=-nolisten tcp -dpi 192
+ServerArguments=-nolisten tcp -dpi 144
 EOF
 echo "Configured $dpi_conf_file with DPI $dpi_value." | tee -a "$LOG"
 

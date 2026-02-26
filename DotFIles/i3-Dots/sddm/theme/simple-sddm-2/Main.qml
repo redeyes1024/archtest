@@ -10,6 +10,10 @@ import QtQuick.Effects
 import QtMultimedia
 
 import "Components"
+FontLoader {
+    id: bundledFont
+    source: Qt.resolvedUrl("Fonts/Thunderman.ttf")
+}
 
 Pane {
     id: root
@@ -26,7 +30,10 @@ Pane {
     palette.highlightedText: config.HighlightTextColor
     palette.buttonText: config.HoverSystemButtonsIconsColor
 
-    font.family: config.Font
+    // Use bundled font if loaded, otherwise fall back
+    font.family: bundledFont.status === FontLoader.Ready
+                 ? bundledFont.name
+                 : (config.Font !== "" ? config.Font : "Sans Serif")
     font.pointSize: config.FontSize !== "" ? config.FontSize : parseInt(height / 80) || 13
     
     focus: true

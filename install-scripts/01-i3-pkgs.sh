@@ -48,6 +48,10 @@ i3_packages=(
   xdg-user-dirs
   xdg-utils
   yad
+  xorg-xset
+  power-profiles-daemon
+  upower
+  gammastep
 )
 
 # Optional / nice-to-have packages

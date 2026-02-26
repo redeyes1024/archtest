@@ -80,7 +80,7 @@ sudo tee "$dpi_conf_file" > /dev/null <<EOF
 [General]
 DisplayServer=x11
 # This forces Qt6 to scale the UI elements (buttons/boxes)
-GreeterEnvironment=QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=144
+GreeterEnvironment=QT_SCREEN_SCALE_FACTORS=1.5,QT_FONT_DPI=144
 
 [X11]
 ServerArguments=-nolisten tcp -dpi 144
